@@ -13,11 +13,6 @@
 		"test:unit": "vitest"
 	},
 	"devDependencies": {
-		"@credo-ts/askar": "^0.5.3",
-		"@credo-ts/core": "^0.5.3",
-		"@credo-ts/node": "^0.5.3",
-		"@credo-ts/openid4vc": "^0.5.3",
-		"@credo-ts/tenants": "^0.5.3",
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/adapter-node": "^5.1.1",
@@ -31,7 +26,15 @@
 		"vitest": "^1.2.0"
 	},
 	"dependencies": {
-		"@hyperledger/aries-askar-nodejs": "^0.2.1"
+		"@hyperledger/aries-askar-nodejs": "^0.2.1",
+		"@credo-ts/askar": "^0.5.3",
+		"@credo-ts/core": "^0.5.3",
+		"@credo-ts/node": "^0.5.3",
+		"@credo-ts/openid4vc": "^0.5.3",
+		"@credo-ts/tenants": "^0.5.3",
+		"@digitalcredentials/open-badges-context": "2.1.0",
+		"awesome-qr": "^2.1.5-rc.0",
+		"reflect-metadata": "0.1.14"
 	},
 	"type": "module"
 }

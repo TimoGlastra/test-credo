@@ -1,3 +1,4 @@
+import "reflect-metadata"
 import { Agent, CacheModule, ConsoleLogger, InMemoryLruCache, KeyDerivationMethod, LogLevel } from '@credo-ts/core'
 import { agentDependencies } from '@credo-ts/node'
 
