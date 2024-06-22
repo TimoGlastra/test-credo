@@ -1,0 +1,7 @@
+services:
+  - type: web
+    runtime: node
+    name: sveltekit
+    buildCommand: pnpm install && pnpm build
+    startCommand: node build/index.js
+    autoDeploy: false
