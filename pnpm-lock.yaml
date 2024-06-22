@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@hyperledger/aries-askar-nodejs':
+        specifier: ^0.2.1
+        version: 0.2.1
     devDependencies:
       '@credo-ts/askar':
         specifier: ^0.5.3
@@ -23,9 +27,6 @@ importers:
       '@credo-ts/tenants':
         specifier: ^0.5.3
         version: 0.5.3(expo@51.0.14(@babel/core@7.24.7)(@babel/preset-env@7.24.7(@babel/core@7.24.7)))(react-native@0.74.2(@babel/core@7.24.7)(@babel/preset-env@7.24.7(@babel/core@7.24.7))(react@18.2.0))(web-streams-polyfill@3.3.3)
-      '@hyperledger/aries-askar-nodejs':
-        specifier: ^0.2.1
-        version: 0.2.1
       '@playwright/test':
         specifier: ^1.28.1
         version: 1.44.1

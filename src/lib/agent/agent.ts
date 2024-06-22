@@ -5,23 +5,18 @@ import { AskarModule, AskarMultiWalletDatabaseScheme } from '@credo-ts/askar'
 import { OpenId4VcHolderModule } from '@credo-ts/openid4vc'
 import { TenantsModule } from '@credo-ts/tenants'
 import { TenantAgent as CredoTenantAgent } from '@credo-ts/tenants/build/TenantAgent'
-import { ariesAskar } from '@hyperledger/aries-askar-nodejs'
 
 import { NodeFileSystem } from "@credo-ts/node/build/NodeFileSystem"
 
 class CustomFileSystem extends NodeFileSystem {
     public constructor() {
         super({
-            baseDataPath: import.meta.env.DEV ? './.data' : '/data',
+            baseDataPath: import.meta.env.DEV ? './.data' : './.data',
         })
     }
 }
 
 const modules = {
-    askar: new AskarModule({
-        ariesAskar: ariesAskar,
-        multiWalletDatabaseScheme: AskarMultiWalletDatabaseScheme.ProfilePerWallet,
-    }),
     openId4VcHolder: new OpenId4VcHolderModule(),
     cache: new CacheModule({
         cache: new InMemoryLruCache({ limit: 500 }),
@@ -31,6 +26,8 @@ const modules = {
 // this prevents the agent from being initalized multple times
 let _agent: Promise<RootAgent> | undefined = undefined
 export const getRootAgent = async (rootWalletKey: string): Promise<RootAgent> => {
+    const { ariesAskar } = (await import('@hyperledger/aries-askar-nodejs'))
+
     if (!_agent) {
         _agent = (async () => {
             const agent = new Agent({
@@ -50,13 +47,17 @@ export const getRootAgent = async (rootWalletKey: string): Promise<RootAgent> =>
                 },
                 modules: {
                     ...modules,
+                    askar: new AskarModule({
+                        ariesAskar,
+                        multiWalletDatabaseScheme: AskarMultiWalletDatabaseScheme.ProfilePerWallet,
+                    }),
                     tenants: new TenantsModule<typeof modules>(),
 
                 },
             })
             await agent.initialize()
             return agent
-        })()
+        })() as unknown as Promise<RootAgent>
     }
 
     return _agent
